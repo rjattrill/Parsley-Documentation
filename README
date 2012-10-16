@@ -1,0 +1,1 @@
+Parsley is an Application Framework for Flex and Flash Applications built upon an IOC Container and Messaging Framework that can be used to create highly decoupled architectures. It allows you to configure objects to be managed by the container with Metadata, MXML, XML or ActionScript and is easily extensible.
