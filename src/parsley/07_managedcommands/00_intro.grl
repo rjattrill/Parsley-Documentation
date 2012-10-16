@@ -1,5 +1,9 @@
 #sc1 managedcommands_intro Managed Commands #sc1
 
+#par The command feature within Parsley provides framework support to manage command classes that are triggered by
+messages and to define response behaviours in other classes.  A key objective is to provide de-coupling between the triggering of commands,
+the structure of commands and the response of classes that rely on command execution.   The framework also provides flexible mechanisms to 
+chain commands and filter or otherwise manage command responses.
 
 #par The Command support in Parsley 3 is a complete rewrite of the DynamicCommand facility in Parsley 2.
 The way you implement a simple command is still mostly the same and you can still map commands to messages
