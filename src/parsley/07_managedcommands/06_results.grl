@@ -16,10 +16,9 @@ objects. They can also potentially alter the result before the external result h
   
 #sc3 managedcommands_result_handler_internal Decoupled Result Handlers and Command Observers #sc3
   
-#par Apart from handling results inside the command itself, other objects can get notified, too.
-There is a set of tags for declaring these on any managed object (like most tags available as metadata, MXML and XML tags). #par  
-  
-  
+#par Apart from handling results inside the command itself, other objects can also be notified to handle 
+the results in various ways.  There is a set of tags for declaring these on any managed object (like most tags available as metadata, MXML and XML tags). #par  
+   
   
 #sub CommandResult #sub
 
@@ -32,7 +31,7 @@ public function handleResult (user:User, message:LoginMessage) : void {
 #cdb
 
 #par In this case the User instance returned by the remote call will be passed to the result handler
-alongside the original message that triggered the action. Like with normal message handlers the parameter
+alongside the original message that triggered the action. As with normal message handlers the parameter
 type for the message is used to determine which handlers to invoke. It is always
 a combination of message type (polymorphically) and an optional selector value which serves as
 a secondary selection key. The type of the result also has to match for this method to get invoked. #par
@@ -40,7 +39,7 @@ a secondary selection key. The type of the result also has to match for this met
 #par If the command that produced the User instance is part of a sequence that was triggered by the 
 specified message type, then by default the result handler will only get invoked after the entire 
 sequence has been completed. This way you do not need to bother processing the result in case
-a subsequent command causes the sequence to abort with an error for example. #par
+a subsequent command causes the sequence to abort - for example due to an error. #par
 
 #par In case you do need to process the result as early as possible, you can use the immediate attribute: #par
 
@@ -56,21 +55,20 @@ public function handleResult (user:User, message:LoginMessage) : void {
 #sub CommandComplete #sub
 
 #par If you are not interested in the actual result, but instead only want to execute some logic
-triggered by the completion of the command, you can use another tag: #par
+triggered by the completion of the command, you can use the #cdi CommandComplete #cdi tag: #par
 
 #cdb
 [CommandComplete]
 public function userSaved (message:SaveUserMessage) : void {
 #cdb
 
-#par This means that this method would get invoked whenever any command triggered by an #cdi SaveUserMessage #cdi has completed. 
+#par This means that the #cdi userSaved #cdi method is invoked whenever any command triggered by an #cdi SaveUserMessage #cdi has completed. 
 In case of sequences this means the method gets invoked after all commands in that sequence completed successfully. #par
-
 
 
 #sub CommandError #sub
 
-#par This tag can be used for receiving the eventual fault events or other errors. #par
+#par The #cdi CommandError #cdi tag can be used for receiving the eventual fault events or other errors. #par
 
 #cdb
 [CommandError]
@@ -84,7 +82,7 @@ for #cdi [CommandResult] #cdi. #par
 
 #sub Overriding the Result #sub
 
-#par Like with a result handler inside a command, a decoupled result handler can also overwrite
+#par As with a result handler inside a command, a decoupled result handler can also overwrite
 the original result. To be able to do this the method needs an additional parameter of type
 #cdi CommandObserverProcessor #cdi, so the exact mechanics are a bit different than for an
 internal result handler: #par
@@ -145,7 +143,7 @@ type and selector are currently executing. It will be false otherwise. This is v
 for tasks like disabling buttons during command execution for example. #par
 
 #par Unfortunately, when using this tag as metadata the trigger message has to be specified as a
-String. For this reason you may sometime prefer to use MXML configuration in such a case: #par
+String. For this reason you may prefer to use MXML configuration: #par
 
 #cdb
 <Object type="{SomeType}">
@@ -153,10 +151,8 @@ String. For this reason you may sometime prefer to use MXML configuration in suc
 </Object>
 #cdb
 
-#par For this configuration style there is no risk that refactoring leads to runtime errors
-due to stale fully qualified class names in buried somewhere in metadata tags. 
+#par With this configuration style there is no risk that refactoring leads to runtime errors
+due to stale fully qualified class names buried somewhere in metadata tags. 
 But of course, now the property name is only a String, albeit a shorter one. #par        
-
-
 
    
