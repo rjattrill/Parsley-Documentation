@@ -1,5 +1,7 @@
 #sc2 managedcommands_mapping Mapping Commands to Messages #sc2
 
+#par This section describes options for declare commands to the Context and mapping messages to command execution #par
+
 #par If you used DynamicCommands in Parsley 2, you are already familiar with the concept of mapping commands to messages.
 In Parsley 3 this feature has been generalized, allowing to map any command, including sequences and flows, to a Parsley
 message, as long as it is implemented in a way that could also be executed by the new Spicelib Commands library (with
@@ -13,7 +15,7 @@ a few feature additions only available in Parsley). #par
 #par A mapping declaration can be as simple as this: #par
 
 #cdb
-<parsley:MapCommand type="{LoadUserCommand}"/>
+<parsley:MapCommand type="{GetUserProfileCommand}"/>
 #cdb
 
 #par Here the only thing that gets specified is the type of command to execute for matching messages.
@@ -35,8 +37,9 @@ public class GetUserProfileCommand {
 }
 #cdb 
 
-#par Like always when something gets configured per-type in Parsley, this is interpreted polymorphically,
-therefore the command will also execute for subclasses of #cdi GetUserProfileMessage #cdi. #par
+#par In the above example, dispatch of a  #cdi GetUserProfileMessage #cdi will trigger the #cdi execute #cdi method. As always when something gets 
+configured per-type in Parsley, this is interpreted polymorphically, therefore the command will also execute for subclasses of 
+#cdi GetUserProfileMessage #cdi. #par
 
 #par For every matching message the container will create a new instance of the command, add it to the Context,
 so that it can act as a fully managed object, e.g. get injections, send messages, etc., process the result
