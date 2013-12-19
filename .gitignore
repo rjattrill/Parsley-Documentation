@@ -1,3 +1,5 @@
 /.project
 spec
 build.properties
+/*.sublime-project
+/*.sublime-workspace
