@@ -29,7 +29,7 @@ See #ref managedcommands_lifecycle #ref for details. #lse
 way to configure Commands (or sequences or flows) in MXML or XML. 
 See #ref managedcommands_groups #ref and #ref managedcommands_flows #ref for details. #lse
 
-#lse As with DynamicCommands in Parsley 2 it allows you to map a Command (or sequence or flow) to a message, so that
+#lse As with DynamicCommands in Parsley 2, you can map a Command (or sequence or flow) to a message, so that
 the container automatically instantiates and executes a new command whenever a matching message is heard. 
 See #ref managedcommands_mapping #ref for details. #lse
 #lst
